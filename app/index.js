@@ -13,6 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = config.PORT;
 
 app.use("/submission", submission);
+app.get("/", (req, res) => {
+    res.status(200).send({
+        msg: "ok",
+    });
+});
 
 // Run the server
 app.listen(PORT, async () => {

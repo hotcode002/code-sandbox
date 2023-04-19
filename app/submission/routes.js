@@ -1,5 +1,5 @@
 import express from "express";
-const { spawn, spawnSync } = require("child_process");
+import { spawn, spawnSync } from "child_process";
 const router = express.Router();
 
 router.get("/", (req, res) => {
