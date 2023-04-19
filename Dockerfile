@@ -27,3 +27,18 @@ RUN cat default.cf >> /usr/local/etc/isolate
 
 # Test isolate
 RUN isolate --init
+
+# Create a new directory to move the server code
+WORKDIR /root/server
+
+# Move the server code into Docker
+COPY . .
+
+# Run npm install
+RUN npm install
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the nodejs server
+CMD [ "npm", "run", "dev"]
