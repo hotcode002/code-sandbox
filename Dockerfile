@@ -8,6 +8,7 @@ RUN apt update
 RUN apt install --yes build-essential
 RUN apt install libcap-dev
 RUN apt install unzip
+RUN apt install --yes vim
 RUN apt install --yes nodejs
 RUN apt install --yes npm
 RUN apt install --yes wget
