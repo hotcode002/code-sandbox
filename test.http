@@ -1,0 +1,20 @@
+POST http://localhost:8080/submissions/xxx
+Content-Type: application/json
+
+{
+    "language_id" : "C",
+    "source_code" : "#include <stdio.h> \n int main() \n { \n printf(\"Hello, World!\"); \n return 0; \n }"
+}
+
+###
+
+GET http://localhost:8080/submissions
+
+###
+
+GET http://localhost:8080/submissions/xx
+
+###
+
+GET http://localhost:8080/
+Content-Type: application/json
