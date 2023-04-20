@@ -1,0 +1,15 @@
+version : '1'
+services :
+  isolate :
+    image : siva002/isolate
+    ports : 
+      - "8080:8080"
+    volumes : 
+      - C:/Users/siva/Documents/poc/code-sandbox:/root/server
+    command :
+      - /bin/bash
+      - -c
+      - |
+        cd /root/server
+        npm install
+        npm run dev
