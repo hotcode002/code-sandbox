@@ -37,14 +37,14 @@ RUN isolate --init
 # Create a new directory to move the server code
 WORKDIR /root/server
 
-# Move the server code into Docker
-COPY . .
+# # Move the server code into Docker
+# COPY . .
 
-# Run npm install
-RUN npm install
+# # Run npm install
+# RUN npm install
 
-# Expose port 8080
-EXPOSE 8080
+# # Expose port 8080
+# EXPOSE 8080
 
-# Run the nodejs server
-CMD [ "npm", "run", "dev"]
+# # Run the nodejs server
+# CMD [ "npm", "run", "dev"]
