@@ -35,7 +35,7 @@ RUN cat default.cf >> /usr/local/etc/isolate
 RUN isolate --init
 
 # Create a new directory to move the server code
-WORKDIR /root/server
+WORKDIR /root/code-sandbox
 
 # # Move the server code into Docker
 # COPY . .

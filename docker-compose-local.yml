@@ -5,11 +5,11 @@ services :
     ports : 
       - "8080:8080"
     volumes : 
-      - C:/Users/siva/Documents/poc/code-sandbox:/root/server
+      - C:/Users/siva/Documents/poc/code-sandbox:/root/code-sandbox
     command :
       - /bin/bash
       - -c
       - |
-        cd /root/server
+        cd /root/code-sandbox
         npm install
         npm run dev
