@@ -20,7 +20,7 @@ global.box_id = 1;
  * isolate directory. Clean them up.
  */
 const folderCleanUpOptions = ["-rf", "/var/local/lib/isolate/*"];
-const folderCleanUp = spawnSync("rm", folderCleanUpOptions);
+const folderCleanUp = spawnSync("rm", folderCleanUpOptions, { shell: true });
 
 console.log(folderCleanUp);
 console.log(folderCleanUp.output[1].toString());

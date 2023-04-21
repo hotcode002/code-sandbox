@@ -43,6 +43,8 @@ router.post("/:id", async (req, res) => {
     const language_id = req.body.language_id;
     const source_code = req.body.source_code;
 
+    const time = req.body.time || 5;
+
     /**
      * Initialize sandbox
      */
@@ -50,18 +52,18 @@ router.post("/:id", async (req, res) => {
     const init = spawnSync("isolate", initOptions);
 
     /**
-     * Populate stdin and stdout files
+     * Populate stdin, stdout and meta files
      */
     const boxLocation = `/var/local/lib/isolate/${global.box_id}/box`;
     fs.writeFileSync(`${boxLocation}/stdin.txt`);
     fs.writeFileSync(`${boxLocation}/stdout.txt`);
+    fs.writeFileSync(`${boxLocation}/meta.txt`);
 
     /**
      * Populate the source code. This is based on the programming language
      */
 
     const fileStructure = languageSpecificFileStructure("C");
-    console.log(fileStructure);
 
     /**
      * Write the source code file
@@ -74,19 +76,33 @@ router.post("/:id", async (req, res) => {
     /**
      * Compile
      */
-    const compileOptions = [
+    const options = [
         `--box-id=${global.box_id}`,
         "-p",
         "--env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
         "--stdin=stdin.txt",
         "--stdout=stdout.txt",
         "--stderr-to-stdout",
+        "--meta=meta.txt",
+        `--time=${time}`,
         "--run",
         "--",
-        `${fileStructure.compilationCommand}`,
     ];
-    const compile = spawnSync("isolate", compileOptions);
+    const compileOptions = [...options, `${fileStructure.compilationCommand}`];
+    const compile = spawnSync("isolate", compileOptions, { shell: true });
 
+    /**
+     * Run
+     */
+    const runOptions = [...options, `${fileStructure.runCommand}`];
+    const run = spawnSync("isolate", runOptions, { shell: true });
+
+    /**
+     * Get Run Results
+     */
+    const stdin = fs.readFileSync(`${boxLocation}/stdin.txt`).toString();
+    const stdout = fs.readFileSync(`${boxLocation}/stdout.txt`).toString();
+    const meta = fs.readFileSync(`${boxLocation}/meta.txt`).toString();
     /**
      * Clean up sandbox
      */
@@ -94,10 +110,17 @@ router.post("/:id", async (req, res) => {
     // const cleanUp = spawnSync("isolate", cleanupOptions);
     res.status(200).json({
         msg: "ok",
-        init: {
+        compile: {
             stdout: compile.stdout.toString(),
             stderr: compile.stderr.toString(),
-            compile,
+            status: compile.status,
+        },
+        run: {
+            stdin,
+            stdout,
+            stderr: run.stderr.toString(),
+            status: run.status,
+            meta,
         },
     });
 });
@@ -121,7 +144,7 @@ const languageSpecificFileStructure = (language_id) => {
         fileStructure.sourceFileName = "main.c";
         fileStructure.outputFileName = "a.out";
         fileStructure.compilationCommand = `/usr/bin/gcc main.c`;
-        fileStructure.runCommand = `a.out`;
+        fileStructure.runCommand = `./a.out`;
     }
 
     return fileStructure;
