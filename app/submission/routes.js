@@ -111,8 +111,6 @@ router.post("/:id", async (req, res) => {
             .toString();
     }
 
-    console.log(response);
-
     /**
      * Run
      */
