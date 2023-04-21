@@ -22,11 +22,6 @@ global.box_id = 1;
 const folderCleanUpOptions = ["-rf", "/var/local/lib/isolate/*"];
 const folderCleanUp = spawnSync("rm", folderCleanUpOptions, { shell: true });
 
-console.log(folderCleanUp);
-console.log(folderCleanUp.output[1].toString());
-console.log(folderCleanUp.stderr.toString());
-console.log(folderCleanUp.stdout.toString());
-
 app.get("/", (req, res) => {
     res.status(200).send({
         msg: "ok",
