@@ -13,13 +13,17 @@ RUN apt install --yes vim
 RUN apt install --yes nodejs
 RUN apt install --yes npm 
 RUN apt install --yes wget
-RUN apt install --yes default-jdk
+# RUN apt install --yes default-jdk
 RUN apt install --yes python3
 
-# Install REDIS
-# RUN curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-# RUN echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
-# RUN apt install redis
+RUN set -xe && \
+    curl -fSsL "https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz" -o /tmp/openjdk20.tar.gz && \
+    mkdir /usr/local/openjdk20 && \
+    tar -xf /tmp/openjdk20.tar.gz -C /usr/local/openjdk20 --strip-components=1 && \
+    rm /tmp/openjdk20.tar.gz && \
+    ln -s /usr/local/openjdk20/bin/javac /usr/local/bin/javac && \
+    ln -s /usr/local/openjdk20/bin/java /usr/local/bin/java && \
+    ln -s /usr/local/openjdk20/bin/jar /usr/local/bin/jar
 
 # Download and install isolate
 WORKDIR /root
