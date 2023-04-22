@@ -11,9 +11,8 @@ RUN apt install unzip
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes nodejs
-# RUN apt install --yes npm 
+RUN apt install --yes npm
 RUN apt install --yes wget
-# RUN apt install --yes default-jdk
 RUN apt install --yes python3
 
 # Install java 20. 
@@ -46,15 +45,3 @@ WORKDIR /root/code-sandbox
 
 # Create a new directory to hold data
 WORKDIR /root/data
-
-# # Move the server code into Docker
-# COPY . .
-
-# # Run npm install
-# RUN npm install
-
-# # Expose port 8080
-# EXPOSE 8080
-
-# # Run the nodejs server
-# CMD [ "npm", "run", "dev"]
