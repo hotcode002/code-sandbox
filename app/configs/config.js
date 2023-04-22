@@ -11,6 +11,7 @@ config.isolate = {
         meta: "--meta=meta.txt",
         processes: "-p",
         run: "--run",
+        dir: "--dir=/root/data",
     },
 };
 

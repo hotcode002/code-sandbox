@@ -75,6 +75,7 @@ router.post("/:id", async (req, res) => {
     );
     const options = [
         `--box-id=${global.box_id}`,
+        config.isolate.run.dir,
         config.isolate.run.processes,
         config.isolate.run.env,
         config.isolate.run.stdin,
@@ -132,8 +133,9 @@ router.post("/:id", async (req, res) => {
     /**
      * Clean up sandbox
      */
-    const cleanupOptions = ["--cleanup", `--box-id=${global.box_id}`];
-    const cleanUp = spawnSync("isolate", cleanupOptions, { shell: true });
+    debugger;
+    // const cleanupOptions = ["--cleanup", `--box-id=${global.box_id}`];
+    // const cleanUp = spawnSync("isolate", cleanupOptions, { shell: true });
 
     res.status(200).json({
         msg: "ok",

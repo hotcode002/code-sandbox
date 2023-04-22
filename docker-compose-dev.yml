@@ -1,15 +1,17 @@
 version : '1'
 services :
   isolate :
-    image : siva002/isolate
+    image : siva002/isolate:latest
     ports : 
       - "8080:8080"
-    volumes : 
-      - C:/Users/siva/Documents/poc/code-sandbox:/root/code-sandbox
+    privileged : true
+    # sysctls :
+      # systemd.unified_cgroup_hierarchy : false
+      # systemd.legacy_systemd_cgroup_controller: false
     command :
       - /bin/bash
       - -c
       - |
-        cd /root/code-sandbox
+        cd /root/code-sandbox-master
         npm install
         npm run dev
