@@ -37,6 +37,9 @@ router.post("/:id", async (req, res) => {
             global.box_id = global.box_id + 1;
         }
 
+        // Get a local copy of the box_id for further processing
+        const box_id = global.box_id;
+
         /**
          * Get input parameters
          */
@@ -48,13 +51,13 @@ router.post("/:id", async (req, res) => {
         /**
          * Initialize sandbox
          */
-        const initOptions = ["--init", `--box-id=${global.box_id}`];
+        const initOptions = ["--init", `--box-id=${box_id}`];
         const init = spawnSync("isolate", initOptions);
 
         /**
          * Populate stdin, stdout and meta files
          */
-        const boxLocation = `/var/local/lib/isolate/${global.box_id}/box`;
+        const boxLocation = `/var/local/lib/isolate/${box_id}/box`;
         fs.writeFileSync(`${boxLocation}/stdin.txt`);
         fs.writeFileSync(`${boxLocation}/stdout.txt`);
         fs.writeFileSync(`${boxLocation}/meta.txt`);
@@ -75,7 +78,7 @@ router.post("/:id", async (req, res) => {
             source_code
         );
         const options = [
-            `--box-id=${global.box_id}`,
+            `--box-id=${box_id}`,
             config.isolate.run.dir,
             config.isolate.run.processes,
             config.isolate.run.env,
@@ -140,7 +143,7 @@ router.post("/:id", async (req, res) => {
         /**
          * Clean up sandbox
          */
-        const cleanupOptions = ["--cleanup", `--box-id=${global.box_id}`];
+        const cleanupOptions = ["--cleanup", `--box-id=${box_id}`];
         const cleanUp = spawnSync("isolate", cleanupOptions, { shell: true });
 
         res.status(200).json({
