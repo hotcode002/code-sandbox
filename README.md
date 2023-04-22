@@ -16,6 +16,12 @@ docker-compose -f docker-compose-local.yml up
 docker-compose -f docker-compose-local.yml down
 ```
 
+If the starting image needs to be updated, run the following command before starting the server. This removes stale images.
+
+```bash
+docker-compose -f docker-compose-local.yml down --rmi all
+```
+
 ## DEV environment
 
 We don't do direct deployments from git. Since isolate container needs to run in the VM in privileged mode, we create a virtual machine with the container downloaded on to it and then run docker-compose up as a start-up command everytime the virtual machine is run.
