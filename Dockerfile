@@ -16,14 +16,14 @@ RUN apt install --yes wget
 # RUN apt install --yes default-jdk
 RUN apt install --yes python3
 
-RUN set -xe && \
-    curl -fSsL "https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz" -o /tmp/openjdk20.tar.gz && \
-    mkdir /usr/local/openjdk20 && \
-    tar -xf /tmp/openjdk20.tar.gz -C /usr/local/openjdk20 --strip-components=1 && \
-    rm /tmp/openjdk20.tar.gz && \
-    ln -s /usr/local/openjdk20/bin/javac /usr/local/bin/javac && \
-    ln -s /usr/local/openjdk20/bin/java /usr/local/bin/java && \
-    ln -s /usr/local/openjdk20/bin/jar /usr/local/bin/jar
+# Install java 20. Default jdk that comes with a regular apt install installs version 11.
+RUN curl -fSsL "https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz" -o /tmp/openjdk20.tar.gz
+RUN mkdir /usr/local/openjdk20
+RUN tar -xf /tmp/openjdk20.tar.gz -C /usr/local/openjdk20 --strip-components=1
+RUN rm /tmp/openjdk20.tar.gz
+RUN ln -s /usr/local/openjdk20/bin/javac /usr/local/bin/javac
+RUN ln -s /usr/local/openjdk20/bin/java /usr/local/bin/java
+RUN ln -s /usr/local/openjdk20/bin/jar /usr/local/bin/jar
 
 # Download and install isolate
 WORKDIR /root
