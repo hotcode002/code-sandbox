@@ -41,6 +41,7 @@ config.languages = {
             compileCommand: "/usr/bin/g++ main.cpp",
             runCommand: "./a.out",
         },
+        default: "11.3.0",
     },
     JAVA: {
         "11.0.18": {

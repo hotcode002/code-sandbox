@@ -100,6 +100,7 @@ router.post("/:id", async (req, res) => {
          * Get the Compile Results
          */
         response.compile = {};
+        response.compile.status = compile.status;
         response.compile.stdin = fs
             .readFileSync(`${boxLocation}/stdin.txt`)
             .toString();
@@ -121,10 +122,12 @@ router.post("/:id", async (req, res) => {
      * Get Run Results
      */
     response.run = {};
+    response.run.status = run.status;
     response.run.stdin = fs.readFileSync(`${boxLocation}/stdin.txt`).toString();
     response.run.stdout = fs
         .readFileSync(`${boxLocation}/stdout.txt`)
         .toString();
+
     response.run.meta = fs.readFileSync(`${boxLocation}/meta.txt`).toString();
     /**
      * Clean up sandbox

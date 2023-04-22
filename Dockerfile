@@ -11,12 +11,13 @@ RUN apt install unzip
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes nodejs
-RUN apt install --yes npm 
+# RUN apt install --yes npm 
 RUN apt install --yes wget
 # RUN apt install --yes default-jdk
 RUN apt install --yes python3
 
-# Install java 20. Default jdk that comes with a regular apt install installs version 11.
+# Install java 20. 
+# Default jdk that comes with a regular apt install installs (RUN apt install --yes default-jdk) version 11.
 # Get the repository zip file from here - https://jdk.java.net/20/
 # Earlier versions are also available. Pick the link under Builds -> Linux/x64
 RUN curl -fSsL "https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz" -o /tmp/openjdk20.tar.gz
@@ -42,6 +43,9 @@ RUN isolate --init
 
 # Create a new directory to move the server code
 WORKDIR /root/code-sandbox
+
+# Create a new directory to hold data
+WORKDIR /root/data
 
 # # Move the server code into Docker
 # COPY . .
