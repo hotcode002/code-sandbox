@@ -61,5 +61,3 @@ After logged in, the docke image can be pushed to docker hub as follows.
 ```bash
 docker push siva002/isolate:latest
 ```
-
-.
