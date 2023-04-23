@@ -1,0 +1,67 @@
+# Build Command
+# docker build . -f Dockerfile.prod -t siva002/isolate:latest
+
+# Push Command
+# docker login
+# docker push siva002/isolate:latest
+
+# start
+FROM ubuntu
+
+# Update path
+ENV PATH=$PATH:/root/isolate-master:/usr/local/node-18.16.0/bin
+
+RUN apt update
+RUN apt install --yes build-essential
+RUN apt install libcap-dev
+RUN apt install unzip
+RUN apt install --yes curl
+RUN apt install --yes vim
+RUN apt install --yes wget
+RUN apt install --yes python3 python3-pip
+
+# Install python ML Packages
+RUN pip3 install numpy pandas scikit-learn scipy
+
+# Install Nodejs
+# Default RUN apt install --yes nodejs installs 12.22.9
+# We will install nodejs version 18.16.0
+RUN curl -fSsl "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz" -o /tmp/node-18.16.0.tar.gz
+RUN mkdir /usr/local/node-18.16.0
+RUN tar -xf /tmp/node-18.16.0.tar.gz -C /usr/local/node-18.16.0 --strip-components=1
+RUN rm -rf /tmp/*
+
+# Install java 20. 
+# Default jdk that comes with a regular apt install installs (RUN apt install --yes default-jdk) version 11.
+# Get the repository zip file from here - https://jdk.java.net/20/
+# Earlier versions are also available. Pick the link under Builds -> Linux/x64
+RUN curl -fSsL "https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz" -o /tmp/openjdk20.tar.gz
+RUN mkdir /usr/local/openjdk20
+RUN tar -xf /tmp/openjdk20.tar.gz -C /usr/local/openjdk20 --strip-components=1
+RUN rm /tmp/openjdk20.tar.gz
+RUN ln -s /usr/local/openjdk20/bin/javac /usr/local/bin/javac
+RUN ln -s /usr/local/openjdk20/bin/java /usr/local/bin/java
+RUN ln -s /usr/local/openjdk20/bin/jar /usr/local/bin/jar
+
+# Download and install isolate
+WORKDIR /root
+RUN wget https://github.com/ioi/isolate/archive/refs/heads/master.zip
+RUN unzip master.zip
+WORKDIR isolate-master
+RUN make isolate
+
+# Configure isolate
+RUN cat default.cf >> /usr/local/etc/isolate
+
+# Test isolate
+RUN isolate --init
+
+# Create a new directory to move the server code
+WORKDIR /root
+RUN git clone https://github.com/hotcode002/code-sandbox.git
+WORKDIR /root/code-sandbox
+RUN git checkout master
+RUN npm install
+
+# Create a new directory to hold data
+WORKDIR /root/data
