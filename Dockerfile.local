@@ -1,3 +1,10 @@
+# Build Command
+# docker build . -f Dockerfile.local -t siva002/isolate:local
+
+# Push Command
+# docker login
+# docker push siva002/isolate:local
+
 # start
 FROM ubuntu
 
@@ -11,7 +18,10 @@ RUN apt install unzip
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes wget
-RUN apt install --yes python3
+RUN apt install --yes python3 python3-pip
+
+# Install python ML Packages
+RUN pip3 install numpy pandas scikit-learn scipy
 
 # Install Nodejs
 # Default RUN apt install --yes nodejs installs 12.22.9
