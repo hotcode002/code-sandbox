@@ -1,9 +1,9 @@
 # Build Command
-# docker build . -f docker/Dockerfile.local -t hotcode002/isolate:local
+# docker build . -f docker/Dockerfile.dev -t hotcode002/isolate:dev
 
 # Push Command
 # docker login
-# docker push hotcode002/isolate:local
+# docker push hotcode002/isolate:dev
 
 # start
 FROM ubuntu
@@ -15,6 +15,7 @@ RUN apt update
 RUN apt install --yes build-essential
 RUN apt install libcap-dev
 RUN apt install unzip
+RUN apt install git
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes wget
