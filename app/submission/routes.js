@@ -10,7 +10,7 @@ const router = express.Router();
  * Create a new submission.
  * 1. All the data needed to execute a code needs to be sent in the body
  */
-router.post("/:id", validateToken, async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
     const response = {};
     const timer = { start: Date.now() };
     try {

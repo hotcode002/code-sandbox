@@ -62,6 +62,7 @@ WORKDIR /root
 RUN git clone https://github.com/hotcode002/code-sandbox.git
 WORKDIR /root/code-sandbox
 RUN git checkout dev
+ADD .env .
 RUN npm install
 
 # Create a new directory to hold data
