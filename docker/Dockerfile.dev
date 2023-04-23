@@ -15,7 +15,7 @@ RUN apt update
 RUN apt install --yes build-essential
 RUN apt install libcap-dev
 RUN apt install unzip
-RUN apt install git
+RUN apt install --yes git
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes wget
