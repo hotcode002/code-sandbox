@@ -2,7 +2,7 @@
 FROM ubuntu
 
 # Update path
-ENV PATH=$PATH:/root/isolate-master
+ENV PATH=$PATH:/root/isolate-master:/usr/local/node-18.16.0/bin
 
 RUN apt update
 RUN apt install --yes build-essential
@@ -10,10 +10,16 @@ RUN apt install libcap-dev
 RUN apt install unzip
 RUN apt install --yes curl
 RUN apt install --yes vim
-RUN apt install --yes nodejs
-RUN apt install --yes npm
 RUN apt install --yes wget
 RUN apt install --yes python3
+
+# Install Nodejs
+# Default RUN apt install --yes nodejs installs 12.22.9
+# We will install nodejs version 18.16.0
+RUN curl -fSsl "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz" -o /tmp/node-18.16.0.tar.gz
+RUN mkdir /usr/local/node-18.16.0
+RUN tar -xf /tmp/node-18.16.0.tar.gz -C /usr/local/node-18.16.0 --strip-components=1
+RUN rm -rf /tmp/*
 
 # Install java 20. 
 # Default jdk that comes with a regular apt install installs (RUN apt install --yes default-jdk) version 11.

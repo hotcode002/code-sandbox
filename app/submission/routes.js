@@ -2,30 +2,15 @@ import express from "express";
 import { spawnSync } from "child_process";
 import fs from "fs";
 import config from "../configs/config.js";
+import { authenticateToken } from "../lib/auth.js";
 
 const router = express.Router();
 
-router.get("/:id", async (req, res) => {
-    return res.status(200).json({
-        msg: req.params.id,
-    });
-});
-
-router.get("/", async (req, res) => {
-    return res.status(200).json({
-        msg: "jobs",
-    });
-});
-
 /**
  * Create a new submission.
- * 1. A unique id needs to be sent per submission.
- * 2. The unique id is needed to later update the status of the submission
- * 3. All the data needed to execute a code needs to be sent in the body
- * 4.
- *
+ * 1. All the data needed to execute a code needs to be sent in the body
  */
-router.post("/:id", async (req, res) => {
+router.post("/:id", authenticateToken, async (req, res) => {
     const response = {};
     const timer = { start: Date.now() };
     try {
