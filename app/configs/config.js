@@ -21,7 +21,7 @@ config.languages = {
             name: "C",
             version: "11.3.0",
             /**
-             * if "compiled" is set to true, we don't directly run the code.
+             * if "compile" is set to true, we don't directly run the code.
              * Instead, we follow the 2 step compile-run
              */
             compile: true,

@@ -1,4 +1,10 @@
-To up Docker
+## Environment Variable
+
+Set up a .env file at the root folder and use the following variable
+
+token-xxx
+
+This token is currently used for authorization.
 
 ## LOCAL environment
 
@@ -61,3 +67,13 @@ After logged in, the docke image can be pushed to docker hub as follows.
 ```bash
 docker push siva002/isolate:latest
 ```
+
+Each of the docker-compose files use a different version of the isolate image.
+
+| Environment | image tag |
+| ----------- | --------- |
+| local       | local     |
+| dev         | dev       |
+| prod        | prod      |
+
+When creating the docker image for each environment, tag accordingly and push.
