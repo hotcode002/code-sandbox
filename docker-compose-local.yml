@@ -1,7 +1,7 @@
 version : '1'
 services :
   isolate :
-    image : siva002/isolate:local
+    image : hotcode002/isolate:local
     ports : 
       - "8080:8080"
     volumes : 
