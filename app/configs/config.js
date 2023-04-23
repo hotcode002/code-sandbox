@@ -67,14 +67,14 @@ config.languages = {
         default: "3.10.6",
     },
     JAVASCRIPT: {
-        "12.22.9": {
+        "18.16.0": {
             name: "Python",
-            version: "12.22.9",
+            version: "18.16.0",
             compile: false,
             sourceFileName: "main.js",
-            runCommand: "/usr/bin/node main.js",
+            runCommand: "/usr/local/node-18.16.0/bin/node main.js",
         },
-        default: "12.22.9",
+        default: "18.16.0",
     },
 };
 

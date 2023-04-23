@@ -2,7 +2,7 @@ import express from "express";
 import { spawnSync } from "child_process";
 import fs from "fs";
 import config from "../configs/config.js";
-import { authenticateToken } from "../lib/auth.js";
+import { validateToken } from "../lib/auth.js";
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ const router = express.Router();
  * Create a new submission.
  * 1. All the data needed to execute a code needs to be sent in the body
  */
-router.post("/:id", authenticateToken, async (req, res) => {
+router.post("/:id", validateToken, async (req, res) => {
     const response = {};
     const timer = { start: Date.now() };
     try {
@@ -46,9 +46,9 @@ router.post("/:id", authenticateToken, async (req, res) => {
          * Populate stdin, stdout and meta files
          */
         const boxLocation = `/var/local/lib/isolate/${box_id}/box`;
-        fs.writeFileSync(`${boxLocation}/stdin.txt`);
-        fs.writeFileSync(`${boxLocation}/stdout.txt`);
-        fs.writeFileSync(`${boxLocation}/meta.txt`);
+        fs.writeFileSync(`${boxLocation}/stdin.txt`, "");
+        fs.writeFileSync(`${boxLocation}/stdout.txt`, "");
+        fs.writeFileSync(`${boxLocation}/meta.txt`, "");
 
         /**
          * Populate the source code. This is based on the programming language

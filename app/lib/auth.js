@@ -18,6 +18,10 @@ export const validateToken = (req, res, next) => {
         // As of now, the token is hardcoded for a single user only.
         // Later we can pull this from the database if more are required.
 
+        if (token !== process.env.token) {
+            throw new Error("Invalid Token");
+        }
+
         next();
     } catch (err) {
         console.log(err);
