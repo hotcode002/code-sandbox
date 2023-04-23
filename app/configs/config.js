@@ -22,7 +22,7 @@ config.languages = {
             version: "11.3.0",
             /**
              * if "compiled" is set to true, we don't directly run the code.
-             * Insted, we follow the 2 step compile-run
+             * Instead, we follow the 2 step compile-run
              */
             compile: true,
             sourceFileName: "main.c",
@@ -45,15 +45,16 @@ config.languages = {
         default: "11.3.0",
     },
     JAVA: {
-        "11.0.18": {
+        "20.0.1": {
             name: "Java",
             version: "11.0.18",
             compile: true,
             sourceFileName: "Main.java",
-            runFileName: "a.out",
-            compileCommand: "/usr/bin/javac Main.java",
-            runCommand: "/usr/bin/java Main",
+            runFileName: "Main.class",
+            compileCommand: "/usr/local/bin/javac Main.java",
+            runCommand: "/usr/local/bin/java Main",
         },
+        default: "20.0.1",
     },
     PYTHON: {
         "3.10.6": {
@@ -63,6 +64,17 @@ config.languages = {
             sourceFileName: "main.py",
             runCommand: "/usr/bin/python3 main.py",
         },
+        default: "3.10.6",
+    },
+    JAVASCRIPT: {
+        "12.22.9": {
+            name: "Python",
+            version: "12.22.9",
+            compile: false,
+            sourceFileName: "main.js",
+            runCommand: "/usr/bin/node main.js",
+        },
+        default: "12.22.9",
     },
 };
 

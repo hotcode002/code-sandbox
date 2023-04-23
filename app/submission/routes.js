@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
  */
 router.post("/:id", async (req, res) => {
     const response = {};
+    const timer = { start: Date.now() };
     try {
         /**
          * Initialize a box
@@ -54,6 +55,8 @@ router.post("/:id", async (req, res) => {
         const initOptions = ["--init", `--box-id=${box_id}`];
         const init = spawnSync("isolate", initOptions);
 
+        timer.init = Date.now();
+
         /**
          * Populate stdin, stdout and meta files
          */
@@ -68,7 +71,6 @@ router.post("/:id", async (req, res) => {
 
         const languageOptions = config.languages[language];
         const languageDefaultOptions = languageOptions[languageOptions.default];
-        console.log(languageDefaultOptions);
 
         /**
          * Write the source code file
@@ -77,6 +79,9 @@ router.post("/:id", async (req, res) => {
             `${boxLocation}/${languageDefaultOptions.sourceFileName}`,
             source_code
         );
+
+        timer.codeWrite = Date.now();
+
         const options = [
             `--box-id=${box_id}`,
             config.isolate.run.dir,
@@ -102,6 +107,7 @@ router.post("/:id", async (req, res) => {
             const compile = spawnSync("isolate", compileOptions, {
                 shell: true,
             });
+            timer.compile = Date.now();
 
             /**
              * Get the Compile Results
@@ -125,6 +131,8 @@ router.post("/:id", async (req, res) => {
         const runOptions = [...options, `${languageDefaultOptions.runCommand}`];
         const run = spawnSync("isolate", runOptions, { shell: true });
 
+        timer.run = Date.now();
+
         /**
          * Get Run Results
          */
@@ -146,11 +154,16 @@ router.post("/:id", async (req, res) => {
         const cleanupOptions = ["--cleanup", `--box-id=${box_id}`];
         const cleanUp = spawnSync("isolate", cleanupOptions, { shell: true });
 
+        timer.cleanUp = Date.now();
+        timer.time = timer.cleanUp - timer.init;
+        response.timer = timer;
+
         res.status(200).json({
             msg: "ok",
             response,
         });
     } catch (err) {
+        console.log(err);
         res.status(400).json({
             msg: "not ok",
             response,
