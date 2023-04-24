@@ -8,9 +8,10 @@
         "legacyWatch": true
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "artillery run tests/1.yml",
         "dev": "nodemon app/index.js",
-        "start": "node app/index.js"
+        "start": "node app/index.js",
+        "worker": "nodemon workers/index.js"
     },
     "repository": {
         "type": "git",
@@ -24,11 +25,16 @@
     "homepage": "https://github.com/hotcode002/code-sandbox#readme",
     "dependencies": {
         "axios": "^1.2.0",
+        "bullmq": "^3.12.0",
         "dotenv": "^16.0.2",
         "express": "^4.18.1",
         "joi": "^17.6.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.6.3",
-        "nodemon": "^2.0.20"
+        "nodemon": "^2.0.20",
+        "redis": "^4.6.5"
+    },
+    "devDependencies": {
+        "artillery": "^2.0.0-31"
     }
 }

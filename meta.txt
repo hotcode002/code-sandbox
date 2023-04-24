@@ -1,6 +1,2 @@
-time:0.034
-time-wall:0.036
-max-rss:43420
-csw-voluntary:31
-csw-forced:2
-exitcode:0
+status:XX
+message:Cannot run proxy, clone failed: Invalid argument

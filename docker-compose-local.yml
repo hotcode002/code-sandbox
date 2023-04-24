@@ -1,20 +1,41 @@
-version : '3.3'
-services :
-  isolate :
-    image : hotcode002/isolate:local
-    ports : 
-      - "8080:8080"
-    volumes : 
-      - C:/Users/siva/Documents/poc/code-sandbox:/root/code-sandbox
-    privileged : true
-    # sysctls :
-      # systemd.unified_cgroup_hierarchy : false
-      # systemd.legacy_systemd_cgroup_controller: false
-    command :
-      - /bin/bash
-      - -c
-      - |
-        cd /root/code-sandbox
-        git checkout dev
-        npm install
-        npm run dev
+version: "3.3"
+services:
+    isolate:
+        image: hotcode002/isolate:local
+        ports:
+            - "8080:8080"
+        volumes:
+            # - C:/Users/siva/Documents/poc/code-sandbox:/root/code-sandbox
+            - /Users/siva/Documents/product/campus-hire/code-sandbox:/root/code-sandbox
+        privileged: true
+        # sysctls :
+        # systemd.unified_cgroup_hierarchy : false
+        # systemd.legacy_systemd_cgroup_controller: false
+        command:
+            - /bin/bash
+            - -c
+            - |
+                cd /root/code-sandbox
+                npm run dev
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        # command : redis-server
+
+    worker:
+        image: hotcode002/isolate:local
+        ports:
+            - "8081:8081"
+        volumes:
+            # Path on windows
+            # - C:/Users/siva/Documents/poc/code-sandbox:/root/code-sandbox
+            # Path on Mac
+            - /Users/siva/Documents/product/campus-hire/code-sandbox:/root/code-sandbox
+        privileged: true
+        command:
+            - /bin/bash
+            - -c
+            - |
+                cd /root/code-sandbox
+                npm run worker
