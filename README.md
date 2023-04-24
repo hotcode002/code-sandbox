@@ -163,7 +163,11 @@ Push the image to the docker hub repository.
 sudo docker push hotcode002/isolate:dev
 ```
 
-Test that docker is working by running docker-compose up
+Test that docker is working by running docker-compose up. But before doing, make sure that you are in the right branch. If you are in the **dev** environment linux machine, switch to the dev branch
+
+```bash
+git checkout dev
+```
 
 ```bash
 sudo docker-compose -f docker-compose-dev.yml up

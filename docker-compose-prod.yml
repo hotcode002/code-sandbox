@@ -10,4 +10,5 @@ services :
       - -c
       - |
         cd /root/code-sandbox
+        npm install
         npm run dev
