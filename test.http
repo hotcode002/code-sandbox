@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-POST {{url}}/submissions
+POST {{url}}/submissions/xx
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 
-POST {{url}}/submissions
+POST {{url}}/submissions/xx
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ###
 
-POST {{url}}/submissions
+POST {{url}}/submissions/xx
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
@@ -50,7 +50,7 @@ Content-Type: application/json
 
 ###
 
-POST {{url}}/submissions
+POST {{url}}/submissions/xx
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
@@ -62,7 +62,7 @@ Content-Type: application/json
 }
 
 ###
-POST {{url}}/submissions
+POST {{url}}/submissions/xx
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 

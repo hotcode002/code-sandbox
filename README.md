@@ -100,7 +100,7 @@ git checkout dev
 It is easier to build all images (isolate image with tags _local_, _dev_, _latest_) on the local machine as opposed to the cloud. Just run
 
 ```bash
-sudo docker build . -f docker/Dockerfile.dev -t hotcode002/isolate:dev
+docker build . -f docker/Dockerfile.dev -t hotcode002/isolate:dev
 ```
 
 and publish it as follows.
