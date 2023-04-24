@@ -228,3 +228,15 @@ Each of the docker-compose files use a different version of the isolate image.
 | prod        | prod      |
 
 When creating the docker image for each environment, tag accordingly and push.
+
+### Remove all Docker Containers
+
+```bash
+docker rm -f $(docker ps -qa)
+```
+
+### Remove all Docker Images
+
+```bash
+docker rmi -f $(docker images -aq)
+```

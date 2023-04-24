@@ -1,4 +1,4 @@
-POST {{url}}/submissions/xx
+POST {{url}}/submissions
 Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
