@@ -10,4 +10,5 @@ services :
       - -c
       - |
         cd /root/code-sandbox
+        git checkout dev
         npm start
