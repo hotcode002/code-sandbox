@@ -1,5 +1,5 @@
-POST http://localhost:8080/submissions/xxx
-Authorization: Bearer 2AEBEDD97C13DAD53F4B22345457F
+POST {{url}}/submissions/xx
+Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
 {
@@ -10,9 +10,22 @@ Content-Type: application/json
 }
 
 ###
+POST {{url}}/submissions
+Authorization: Bearer {{$dotenv %token}}
+Content-Type: application/json
 
-POST http://localhost:8080/submissions/xxx
-Authorization: Bearer 2AEBEDD97C13DAD53F4B22345457F
+{
+    "id" : "xxx",
+    "callback_url" : "http://localhost:8080/",
+    "language" : "C",
+    "source_code" : "#include <stdio.h> \n int main() \n { \n printf(\"Hello, World!\"); \n return 0; \n }"
+}
+
+
+###
+
+POST {{url}}/submissions
+Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
 {
@@ -24,8 +37,8 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/submissions/xxx
-Authorization: Bearer 2AEBEDD97C13DAD53F4B22345457F
+POST {{url}}/submissions
+Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
 {
@@ -37,8 +50,8 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/submissions/xxx
-Authorization: Bearer 2AEBEDD97C13DAD53F4B22345457F
+POST {{url}}/submissions
+Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
 {
@@ -49,8 +62,8 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/submissions/xxx
-Authorization: Bearer 2AEBEDD97C13DAD53F4B22345457F
+POST {{url}}/submissions
+Authorization: Bearer {{$dotenv %token}}
 Content-Type: application/json
 
 {

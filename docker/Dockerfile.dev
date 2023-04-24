@@ -1,9 +1,9 @@
 # Build Command
-# docker build . -f Dockerfile.local -t siva002/isolate:local
+# docker build . -f docker/Dockerfile.dev -t hotcode002/isolate:dev
 
 # Push Command
 # docker login
-# docker push siva002/isolate:local
+# docker push hotcode002/isolate:dev
 
 # start
 FROM ubuntu
@@ -15,6 +15,7 @@ RUN apt update
 RUN apt install --yes build-essential
 RUN apt install libcap-dev
 RUN apt install unzip
+RUN apt install --yes git
 RUN apt install --yes curl
 RUN apt install --yes vim
 RUN apt install --yes wget
@@ -61,6 +62,7 @@ WORKDIR /root
 RUN git clone https://github.com/hotcode002/code-sandbox.git
 WORKDIR /root/code-sandbox
 RUN git checkout dev
+ADD .env .
 RUN npm install
 
 # Create a new directory to hold data

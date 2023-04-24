@@ -1,9 +1,9 @@
 # Build Command
-# docker build . -f Dockerfile.local -t siva002/isolate:local
+# docker build . -f docker/Dockerfile.local -t hotcode002/isolate:local
 
 # Push Command
 # docker login
-# docker push siva002/isolate:local
+# docker push hotcode002/isolate:local
 
 # start
 FROM ubuntu

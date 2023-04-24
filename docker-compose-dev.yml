@@ -1,7 +1,7 @@
-version : '1'
+version : '3.3'
 services :
   isolate :
-    image : siva002/isolate:dev
+    image : hotcode002/isolate:dev
     ports : 
       - "80:8080"
     privileged : true
@@ -10,4 +10,5 @@ services :
       - -c
       - |
         cd /root/code-sandbox
+        git checkout dev
         npm start

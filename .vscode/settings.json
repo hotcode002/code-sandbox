@@ -1,0 +1,12 @@
+{
+    "rest-client.environmentVariables": {
+        "local": {
+            "url": "http://localhost:8080"
+        },
+        "dev": {
+            "url": "http://34.100.210.164"
+        },
+        "dev2": { "url": "https://dev2-api.campushire.net" },
+        "prod": { "url": "https://api.campushire.net" }
+    }
+}

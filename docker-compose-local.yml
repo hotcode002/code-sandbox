@@ -1,7 +1,7 @@
-version : '1'
+version : '3.3'
 services :
   isolate :
-    image : siva002/isolate:local
+    image : hotcode002/isolate:local
     ports : 
       - "8080:8080"
     volumes : 
@@ -15,5 +15,6 @@ services :
       - -c
       - |
         cd /root/code-sandbox
+        git checkout dev
         npm install
         npm run dev
